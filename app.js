@@ -1,16 +1,14 @@
 /*
 This is more advanced stuff, and I want you to first get 100% familiar with what I showed you before. Code a couple of projects, maybe some bigger ones, whithout using object oriented JS, so that you will find the limitaions that it has when the code grows bigger and bigger.
-
 */
 
 
 /////////////////////////////////////////////////////////////////////
 // Function constructor for an expense. We choose to create objects like this because we will have multiple expenses, so we will create many objects. We put methods in its prototype so all objects created through this constructor will inherit these methods, instead of having the methods attached to each individual object. We will read and mutate all its properties using methods, to further encapsulate the data
-function Expense(id, description, value, paymentStatus) {
+function Expense(id, description, value) {
     this.id = id; // For deleting items
     this.description = description;
     this.value = value;
-    this.paymentStatus = paymentStatus;
     this.percentage = -1;
 }
 
@@ -58,7 +56,7 @@ function expenseController() { //Later add Constructor argument to this
 
         // Not using the same names here on purpose, do it's less confusing
         // We return the newItem so that we can use it in the controller (more specifically, to pass it to the UIController which displays it in the UI)
-        addItem: function(Constructor, des, val, paymentStatus) {
+        addItem: function(Constructor, des, val) {
             var newID, newItem;
             
             // This is necessary because deletions will change the order, so we always want the next id to be the last +1
@@ -68,8 +66,7 @@ function expenseController() { //Later add Constructor argument to this
                 newID = 0;
             }
             
-            // We will be able to use this also for the income, which does not have a payment status, because it does not matter to JS if we pass too many arguments
-            newItem = new Constructor(newID, des, val, paymentStatus);
+            newItem = new Constructor(newID, des, val);
             this.allItems.push(newItem);
             return newItem;
         },
@@ -160,8 +157,7 @@ function UIController() {
             return {
                 type: document.querySelector(this.DOMSelectors.inputType).value,
                 description: document.querySelector(this.DOMSelectors.inputDescription).value,
-                value: parseFloat(document.querySelector(this.DOMSelectors.inputValue).value),
-                paymentStatus: document.querySelector(this.DOMSelectors.inputPaymentSatus).value
+                value: parseFloat(document.querySelector(this.DOMSelectors.inputValue).value)
             };
         },
         
@@ -199,11 +195,6 @@ function UIController() {
             
             //https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
             document.querySelector(el).insertAdjacentHTML('beforeend', html);
-            
-            // Add unpaid class
-            if(obj.paymentStatus === 'unpaid') {
-                document.querySelector('#' + type + '-' + obj.id).classList.add('unpaid')
-            }
         },
 
         deleteListItem: function(selectorID) {
@@ -237,15 +228,13 @@ function UIController() {
             var fields = document.querySelectorAll(
                 this.DOMSelectors.inputType + ', ' +
                 this.DOMSelectors.inputDescription + ', ' +
-                this.DOMSelectors.inputValue + ', ' + 
-                this.DOMSelectors.inputPaymentSatus);
+                this.DOMSelectors.inputValue);
             
             // Another way of looping over elements
             for (var i = 0; i < fields.length; i++) {
                 fields[i].classList.toggle('red-focus');
             }
             
-            document.querySelector(this.DOMSelectors.inputPaymentSatus).classList.toggle('hidden');
             document.querySelector(this.DOMSelectors.inputBtn).classList.toggle('red');
         },
         
@@ -298,7 +287,6 @@ function controller(incCtrl, expCtrl, UICtrl, Inc, Exp) {
             inputType:           '.add__type',
             inputDescription:    '.add__description',
             inputValue:          '.add__value',
-            inputPaymentSatus:   '.add__payment-status',
             inputBtn:            '.add__btn',
             container:           '.container',
             incomeContainer:     '.income__list',
@@ -334,10 +322,10 @@ function controller(incCtrl, expCtrl, UICtrl, Inc, Exp) {
                     
                     // 2. Add item to corresponding object controller
                     if (input.type === "expense") {
-                        newItem = expCtrl.addItem(Exp, input.description, input.value, input.paymentStatus);
+                        newItem = expCtrl.addItem(Exp, input.description, input.value);
                         
                     } else if (input.type === "income") {
-                        // Method borrowing, be setting the 'this' var to the object that want to borrow the method. We will simply not pass the payment status, which will then be set as undefined, and ignored by the function constructor.
+                        // Method borrowing, be setting the 'this' var to the object that want to borrow the method.
                         newItem = expCtrl.addItem.call(incCtrl, Inc, input.description, input.value)
                     }
                     
