@@ -5,14 +5,14 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
         <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="style.css">
-        <title>AmazingQuiz</title>
+        <title>Budgety</title>
     </head>
     <body>
         
         <div class="top">
             <div class="budget">
                 <div class="budget__title">
-                    Available Budget in <span class="budget__title--month">May</span>:
+                    Available Budget in <span class="budget__title--month">%Month%</span>:
                 </div>
                 
                 <div class="budget__value">+ 2,345.64</div>
@@ -31,7 +31,6 @@
                         <div class="budget__expenses--value">- 1,954.36</div>
                         <div class="budget__expenses--percentage">45%</div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -42,12 +41,13 @@
             <div class="add">
                 <div class="add__container">
                     <select class="add__type">
-                        <option value="income" selected>+</option>
-                        <option value="expense">-</option>
+                        <option value="inc" selected>+</option>
+                        <option value="exp">-</option>
                     </select>
                     <input type="text" class="add__description" placeholder="Add description">
                     <input type="number" class="add__value" placeholder="Value">
-                    <button class="add__btn"><i class="ion-ios-checkmark-outline"></i></button>
+                    <button class="sum_btn">=</button>
+                    <!-- <button class="add__btn"><i class="ion-ios-checkmark-outline"></i></button> -->
                 </div>
             </div>
             
@@ -77,26 +77,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="item clearfix" id="income-2">
-                            <div class="item__description">Stock dividends</div>
-                            <div class="right clearfix">
-                                <div class="item__value">+ 600.00</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="item clearfix" id="income-3">
-                            <div class="item__description">Won small lottery prize</div>
-                            <div class="right clearfix">
-                                <div class="item__value">+ 100.00</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
                         -->
                         
                     </div>
@@ -121,88 +101,11 @@
                             </div>
                         </div>
 
-                        <div class="item clearfix" id="expense-0">
+                        <div class="item clearfix" id="expense-1">
                             <div class="item__description">Grocery shopping</div>
                             <div class="right clearfix">
                                 <div class="item__value">- 435.28</div>
                                 <div class="item__percentage">10%</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item clearfix" id="expense-0">
-                            <div class="item__description">Dining out with family</div>
-                            <div class="right clearfix">
-                                <div class="item__value">- 117.98</div>
-                                <div class="item__percentage">4%</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item clearfix" id="expense-0">
-                            <div class="item__description">Gas for car</div>
-                            <div class="right clearfix">
-                                <div class="item__value">- 93.33</div>
-                                <div class="item__percentage">3%</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="item clearfix unpaid" id="expense-0">
-                            <div class="item__description">Car insurance 2016</div>
-                            <div class="right clearfix">
-                                <div class="item__value">- 231.55</div>
-                                <div class="item__percentage">5%</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="item clearfix" id="expense-0">
-                            <div class="item__description">Electricity bill</div>
-                            <div class="right clearfix">
-                                <div class="item__value">- 34.19</div>
-                                <div class="item__percentage">2%</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="item clearfix" id="expense-0">
-                            <div class="item__description">Phone bill</div>
-                            <div class="right clearfix">
-                                <div class="item__value">- 49.99</div>
-                                <div class="item__percentage">2%</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="item clearfix" id="expense-0">
-                            <div class="item__description">Gift for Mom's birthday</div>
-                            <div class="right clearfix">
-                                <div class="item__value">- 80.00</div>
-                                <div class="item__percentage">2%</div>
-                                <div class="item__delete">
-                                    <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="item clearfix" id="expense-0">
-                            <div class="item__description">Dining out with Mark</div>
-                            <div class="right clearfix">
-                                <div class="item__value">- 18.67</div>
-                                <div class="item__percentage">1%</div>
                                 <div class="item__delete">
                                     <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
                                 </div>
